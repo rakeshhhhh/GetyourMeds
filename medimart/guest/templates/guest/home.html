@@ -1,0 +1,98 @@
+{% extends 'guest/shared/base.html' %}
+
+
+{% block content %}
+{% load static %}
+<div class="site-section" id="elementtoScrollToID">
+    <div class="container">
+    <div class="row">
+        <div class="title-section text-center col-12">
+        <h1 class="text-uppercase">Popular Products</h1><br>
+        </div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row p-5">
+            <div class="col-sm-6">Search To Find Medicine That Available On The Nearest(20km) Shop</div>
+            <div class="col-sm-4">
+                <input type="search" class="form-control" name="search" id="search">
+                <input type="hidden" name="long" id="long">
+                <input type="hidden" name="lati" id="lati">
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-warning">Find</button>
+            </div>
+        </div>
+    </form>
+        <div class="row pt-5">
+            
+            {% if data3 %}
+            
+            {% for i in data3 %}
+                <div class="col-sm-4 col-lg-4 text-center item p-4">       
+                    <img src="/media/{{ i.0.medicine.image }}" alt="Image">
+                    <h3 class="text-dark"><a href="shop-single.html">{{ i.0.medicine.name }}</a></h3>
+                    {% if i.0.qty == 0 %}
+                    <span class="tag bg-danger">Out</span>
+                    {% elif i.0.qty > 0 and i.0.qty < 10 %}
+                    <span class="tag bg-warning">Ltd</span>
+                    {% else %}
+                    <span class="tag bg-success">In</span>
+                    {% endif %}
+                    <p class="price"><del>Rs.{{ i.0.price }}</del> &mdash; Rs.{{ i.0.price }}</p>
+                    <p class="shop text-dark">{{ i.0.shop.username }}</p>
+                    
+                    {% if data3 %}
+                    <p> Distance: {{ i.1 }} Km</p>
+                    {% endif %}
+                        
+                    <a href="{% url 'guest_product' id=i.0.id %}" class="btn btn-primary btn-block">View More</a>
+                </div>
+            {% endfor %}
+
+            {% else %}
+
+            {% for i in data %}
+                <div class="col-sm-4 col-lg-4 text-center item p-4">       
+                    <img src="/media/{{ i.medicine.image }}" alt="Image">
+                    <h3 class="text-dark"><a href="shop-single.html">{{ i.medicine.name }}</a></h3>
+                    {% if i.qty == 0 %}
+                    <span class="tag bg-danger">Out</span>
+                    {% elif i.qty > 0 and i.qty < 10 %}
+                    <span class="tag bg-warning">Ltd</span>
+                    {% else %}
+                    <span class="tag bg-success">In</span>
+                    {% endif %}
+                    <p class="price"><del>Rs.{{ i.price }}</del> &mdash; Rs.{{ i.price }}</p>
+                    <p class="shop text-dark">{{ i.shop.username }}</p>
+                    
+                    {% if data3 %}
+                       <p> Distance: {{ data3.forloop.counter }} Km</p>
+                    {% endif %}
+                        
+                    <a href="{% url 'guest_product' id=i.id %}" class="btn btn-primary btn-block">View More</a>
+                </div>
+            {% endfor %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<script>
+$(function(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        alrt("Geolocation is not supported by this browser.")
+    }        
+})
+var showPosition = function(position) {
+    $('#lati').val(position.coords.latitude)
+    $('#long').val(position.coords.longitude)
+}
+</script>
+
+{% endblock content %}
+    

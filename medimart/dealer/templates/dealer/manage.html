@@ -1,0 +1,55 @@
+{% extends 'dealer/shared/base.html' %}
+
+{% block content %}
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Manage Medicine</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Mfr</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.code }}</td>
+                            <td>{{ i.mf_name }}</td>
+                            <td>{{ i.price }}</td>
+                            <td><img src="/media/{{ i.image }}" width="100px" height="80px" /></td>
+                            <td>
+                            {% if i.status == 'available' %}
+                                <span class="badge badge-success">available</span>
+                            {% else %}
+                                <span class="badge badge-danger">not available</span>
+                            {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-warning" href="{% url 'dealer_edit_medicine' id=i.id %}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-danger" href="{% url 'dealer_delete_medicine' id=i.id %}"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock content %}
+

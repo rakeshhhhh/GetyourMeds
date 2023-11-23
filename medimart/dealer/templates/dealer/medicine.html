@@ -1,0 +1,17 @@
+{% extends 'dealer/shared/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <h3 class="text-center">Add Medicine</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                   <button class="btn btn-primary float-right">ADD</button>
+                 </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

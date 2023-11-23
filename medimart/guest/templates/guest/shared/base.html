@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> GETMEDS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'common/fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+  <link rel="stylesheet" href="{% static 'common/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'common/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'common/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'common/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'common/css/owl.theme.default.min.css' %}">
+
+
+  <link rel="stylesheet" href="{% static 'common/css/aos.css' %}">
+
+  <link rel="stylesheet" href="{% static 'common/css/style.css'%}">
+  <script src="{% static 'common/js/jquery-3.3.1.min.js' %}"></script>
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      {% include 'guest/shared/navbar.html' %}
+
+    <div class="site-blocks-cover" style="background-image: url('{% static 'common/images/fgh.jpg' %}')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 ml-auto order-lg-2 align-self-center">
+            <div class="site-block-cover-content text-center">
+              <h2 class="sub-title text-danger">Effective Medicine, New Medicine Everyday</h2>
+              <h1>Welcome to GET<small>your</small>MEDS</h1>
+              <p>
+<!--                <a href="#" id="shopnow" class="btn btn-primary px-5 py-3">SignIn</a>-->
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row align-items-stretch section-overlap">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap bg-primary h-100">
+              <a href="#" class="h-100">
+                <h5>Free <br> Shipping</h5>
+
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap h-100">
+              <a href="#" class="h-100">
+                <h5>Season <br> Sale 50% Off</h5>
+
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap bg-warning h-100">
+              <a href="#" class="h-100">
+                <h5>Buy <br> A Gift Card</h5>
+
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    {% block content %}
+        
+    {% endblock content %}
+        
+
+
+
+
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | GetYour MEDS<i class="icon-heart" aria-hidden="true"></i>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{% static 'common/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'common/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'common/js/popper.min.js' %}"></script>
+  <script src="{% static 'common/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'common/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'common/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'common/js/aos.js' %}"></script>
+  <script src="{% static 'common/js/main.js' %}"></script>
+
+  <script>
+      $(function(){
+        $("#shopnow").click(function() {
+            var offset = 20; //Offset of 20px
+
+            $('html, body').animate({
+                scrollTop: $("#elementtoScrollToID").offset().top + offset
+            }, 2000);
+        });
+      })
+  </script>
+
+</body>
+
+</html>

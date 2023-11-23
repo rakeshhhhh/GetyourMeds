@@ -1,0 +1,81 @@
+{% extends 'shop/shared/base.html' %}
+
+{% block content %}
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Stock Details</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Dealer Price</th>
+                        <th>Shop Price</th>
+                        <th>Available Qty</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id='data'>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.medicine.name }}</td>
+                            <td>{{ i.medicine.code }}</td>
+                            <td>Rs.{{ i.medicine.price }}</td>
+                            <form method="post" id="form">
+                                {% csrf_token %}
+                                <input type="hidden" name="reqid" id="reqid" value="{{ i.id }}">
+                                <td>
+                                    {% if i.status == 1 %}
+                                    Rs.<input type="text" class="" value="{{ i.price }}" name="price" id="price" style="width: 60px;" required>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-edit    "></i></button>
+                                    {% else %}
+                                    Rs.<input type="text" class="" value="{{ i.price }}" name="price" id="price" style="width: 60px;" required>
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-upload" aria-hidden="true"></i></button>
+                                    {% endif %}
+                                </td>            
+                            </form>
+                            <td>
+                                
+                                {% if i.qty %}
+                                    {{ i.qty }}
+                                {% else %}
+                                <form action="/shop/rerequest/" method="post" id="form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="reqid" id="reqid" value="{{ i.id }}">
+                                    <input type="number" class="" value="" name="qty" id="qty" style="width: 60px;" required>
+                                    <button type="submit" class="btn btn-warning">ADD</button>            
+                                </form>
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'shop_delete_stock' id=i.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#data').on('keyup','.qty',function(){
+            t = eval($(this).val()+'*'+$(this).attr('data1'))
+            s = '#amount'+$(this).attr('data2')
+            if($(this).val()==null){
+                $(s).text(0)
+            }else{
+                $(s).text(t)
+            }
+        })
+    })
+</script>  
+
+{% endblock content %}
+
+

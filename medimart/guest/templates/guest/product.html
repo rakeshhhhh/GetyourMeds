@@ -1,0 +1,82 @@
+{% extends 'guest/temp.html' %}
+
+
+{% block content %}
+{% load static %}
+<div class="site-section" id="elementtoScrollToID">
+    <div class="container">
+    <div class="row">
+        <div class="title-section text-center col-12">
+        <h2 class="text-uppercase">Products Details</h2>
+        </div>
+    </div>
+        <div class="row bg-light p-4 rounded shadow">
+            <div class="col-sm-6 p-3">
+                <img src="/media/{{ data.medicine.image }}" class="rounded" width="100%" alt="">
+            </div>
+            <div class="col-sm-6 p-3 text-dark">
+                <h2 class="text-uppercase">{{ data.medicine.name }}</h2>
+                <p>Medicine Code: {{ data.medicine.code }}</p>
+                <p>Manufactuer Name: {{ data.medicine.mf_name }}</p>
+                <p>Price: Rs. {{ data.price }}/-</p>
+                <p>Shop Name & Details:<br>
+                    Name: {{ data.shop.username }}<br>
+                    City: {{ data.shop.city }}, {{ data.shop.place }} <br>
+                    Pin Code: {{ data.shop.pin_code }} <br>
+                    Contact: {{ data.shop.phone }}, 
+                    E-mail: {{ data.shop.email }}
+                </p>
+                <div class="row">
+                    <form method="post" class="form-row">
+                        {% csrf_token %}
+                    <input type="hidden" name="reqid" value="{{ data.id }}">
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control sm-4" required name="qty" id="qty">
+                        </div>
+                        <div class="col-sm-9">
+                            <button class="btn btn-info">Add to Cart</button>
+                            <!-- <button class="btn btn-warning">Buy Now</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row bg-light p-4 rounded shadow">
+            <div class="col-sm-6 text-dark">
+                <h3>Product Review</h3>
+                <Label>Write a Review Here:</Label>
+                <form action="/review/post/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="medid" value="{{ data.id }}">
+                    <input type="text" name="title" id="title" placeholder="Titile" class="form-control mt-3">
+                    <textarea name="review" id="review" cols="30" placeholder="Description" rows="5" class="mt-3 form-control"></textarea>
+                    <input type="range" name="rating" id="rating" class="mt-3" min="0" value="0" max="5"><b><span id='v' class="bg-success m-2 text-white rounded p-2">0</span>Star Rating</b>
+                    <button class="btn btn-secondary float-right mt-3">Post</button>
+                </form>
+            </div>
+            <div class="col-sm-6 text-dark">
+                <h3>Customer Reviews</h3>
+                <div class="m-2 p-2">
+                    
+                    {% for i in data1 %}
+                        <h6><strong>{{ i.title }}</strong> [ Rating {{ i.rating }} out of 5.0 ]</h6>
+                        <span>Posted By: {{ i.customer.first_name }} {{ i.customer.last_name }}</span>
+                        <br>Date: <code>{{i.date}}</code><br>
+                        <p>{{ i.description }}</p>
+                        
+                        <hr>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#rating').change(function(){
+            $('#v').text( $('#rating').val())
+        })
+    })
+</script>
+{% endblock content %}

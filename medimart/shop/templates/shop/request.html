@@ -1,0 +1,54 @@
+{% extends 'shop/shared/base.html' %}
+
+{% block content %}
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Stock Details</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Dealer Name</th>
+                        <th>Dealer Price</th>
+                        <th>Date</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id='data'>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.medicine.name }}</td>
+                            <td>{{ i.medicine.code }}</td>
+                            <td>{{ i.medicine.dealer.username }}</td>
+                            <td>Rs.{{ i.medicine.price }}</td>
+                            <td>{{ i.date }}</td>    
+                            <td>{{ i.qty }}</td>
+                            <td>{% widthratio i.medicine.price 1 i.qty %}</td>
+                            <td>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ i.id }}" name="reqid">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+

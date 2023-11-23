@@ -1,0 +1,45 @@
+{% extends 'guest/temp.html' %}
+
+
+{% block content %}
+{% load static %}
+<div class="site-section" id="elementtoScrollToID">
+    <div class="container">
+    <div class="row">
+        <div class="title-section text-center col-12">
+        <h2 class="text-uppercase">My Orders</h2>
+        </div>
+    </div>
+        <div class="row bg-light p-4 rounded shadow">
+            <div class="col-sm-12 p-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Product</th>
+                            <th>Product Code</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id='data'>
+                        {% for i in data %}
+                            <tr>
+                                <td>{{ i.id }}</td>
+                                <td>{{ i.customer.first_name }} {{ i.customer.last_name }}</td>
+                                <td>{{ i.product.medicine.name }}</td>
+                                <td>{{ i.product.medicine.code }}</td>
+                                <td>{{ i.qty }}</td>
+                                <td>Rs.{{ i.total }}</td>
+                                <td>{{ i.date }}</td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

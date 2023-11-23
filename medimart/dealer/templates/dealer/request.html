@@ -1,0 +1,50 @@
+{% extends 'dealer/shared/base.html' %}
+
+{% block content %}
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Manage Medicine</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Shop</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.medicine.name }}</td>
+                            <td>{{ i.medicine.code }}</td>
+                            <td>{{ i.shop.username }}</td>
+                            <td>{{ i.date }}</td>
+                            <td>{{ i.medicine.price }}</td>
+                            <td>{{ i.qty }}</td>
+                            <td>{% widthratio i.medicine.price 1 i.qty %}</td>
+                            <td>
+                                <a class="btn btn-warning" href="{% url 'dealer_accept' id=i.id %}">Approve</a>
+                            </td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock content %}
+

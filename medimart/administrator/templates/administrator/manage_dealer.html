@@ -1,0 +1,54 @@
+{% extends 'administrator/shared/base.html' %}
+
+{% block content %}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Dealer Manage</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Place</th>
+                        <th>Pin</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.first_name }} {{ i.last_name }}</td>
+                            <td>{{ i.city }}</td>
+                            <td>{{ i.place }}</td>
+                            <td>{{ i.pin_code }}</td>
+                            <td>{{ i.phone }}</td>
+                            <td>{{ i.email }}</td>
+                            
+                                <td>
+                                    
+                                    {% if i.is_active %}
+                                    <a class="btn btn-warning" href="{% url 'admin_approve' sec=i.user_type id=i.id %}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    {% else %}
+                                    <a class="btn btn-success" href="{% url 'admin_approve' sec=i.user_type id=i.id %}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    {% endif %}
+                                    <a class="btn btn-danger" href="{% url 'admin_delete' sec=i.user_type id=i.id %}"><i class="fas fa-trash"></i></a>
+                                </td>
+                                
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

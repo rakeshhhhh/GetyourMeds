@@ -1,0 +1,44 @@
+{% extends 'shop/shared/base.html' %}
+
+{% block content %}
+
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Order History</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Product</th>
+                        <th>Product Code</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id='data'>
+                    {% for i in data %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.customer.first_name }} {{ i.customer.last_name }}</td>
+                            <td>{{ i.product.medicine.name }}</td>
+                            <td>{{ i.product.medicine.code }}</td>
+                            <td>{{ i.qty }}</td>
+                            <td>Rs.{{ i.total }}</td>
+                            <td>{{ i.date }}</td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+
+{% endblock content %}
+
+

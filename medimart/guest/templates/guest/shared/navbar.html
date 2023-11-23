@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="logo">
+        <div class="site-logo">
+            <a href="/" class="js-logo-clone">&nbsp;<i class="fa-solid fa-house-medical"></i> GET<small>your</small>MEDS</a>
+        </div>
+      </div>
+      <div class="main-nav d-none d-lg-block">
+        <nav class="site-navigation text-right text-md-center" role="navigation">
+          <ul class="site-menu js-clone-nav d-none d-lg-block">
+              <a href="{% url 'guest_home' %}" class="d-inline-block bag">
+                HOME
+              </a> &nbsp;
+
+              {% if user.username %}
+
+              <a href="{% url 'logout' %}" class="d-inline-block bag">
+                Logout({{ user.username }})
+              </a> &nbsp;
+              <a href="{% url 'guest_myorde' %}" class="d-inline-block bag">
+                My Order
+              </a>
+              {% else %}
+            <li><div class="dropdown">
+              <a class="d-inline-block bag text-dark dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                    SIGN-UP
+            </a>
+              <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a class="dropdown-item" href="{% url 'guest_customer' %}">Customer</a>
+                <a class="dropdown-item" href="{% url 'guest_dealer' %}">Dealer</a>
+                <a class="dropdown-item" href="{% url 'guest_shop' %}">Shop</a>
+              </div>
+            </div></li>
+            <li>
+              <a href="{% url 'guest_login' %}" class="d-inline-block bag">
+                Login
+              </a>
+              {% endif %} 
+          </li>
+          <li>
+          {% if user.username %}
+            {% if data2 %}
+            <a href="{% url 'guest_cart_view' %}" class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="number">{{ data2 }}</span></a>
+              {% else %}
+            &nbsp; <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="number">0</span></a>
+            {% endif %}
+          {% endif %}
+          </li>
+          </div>
+          </ul>
+        </nav>
+      </div>
+      <div class="">
+        
+    </div>
+  </div>
+</div>
+<script src="https://kit.fontawesome.com/4876f21364.js" crossorigin="anonymous"></script>
