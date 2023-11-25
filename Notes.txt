@@ -1,0 +1,12 @@
+superuser admin@123= rakesh123
+
+dealer= dealer-dealer
+        erty-erty
+
+shop= shop-shop
+      shop1-shop1
+      qwerty-1234567890
+
+
+user= qwertyas-qwertyuiop
+      rakeshhh-1234567890
